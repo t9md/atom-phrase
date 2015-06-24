@@ -63,4 +63,6 @@ e.g.
 ```
 
 # TODO
-- [ ] ...
+- [ ] Auto insert result to `Output:` placeholder.
+- [ ] Select phrase and run with one commmand like `phrase:update-output`.
+- [ ] Put cursor to title with `tab`?
