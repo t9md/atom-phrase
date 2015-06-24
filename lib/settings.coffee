@@ -7,40 +7,30 @@ config =
     type: 'string'
     default: path.join(atom.config.get('core.projectHome'), "phrase")
     description: "Root directory of your phrase buffer"
-  basename:
-    order: 2
-    type: 'string'
-    default: 'phrase'
-    description: "Basename of phrase buffer"
   clearSelection:
-    order: 3
+    order: 2
     type: 'boolean'
     default: true
     description: "Clear original selection"
   pasteTo:
-    order: 4
+    order: 3
     type: 'string'
     default: "top"
     enum: ["bottom", "top", "here"]
-    description: "Where selected text is pasted."
+    description: "Where selected phrase is pasted in phrase file."
   select:
-    order: 5
+    order: 4
     type: 'boolean'
     default: true
     description: "Select pasted text"
-  # autoIndent:
-  #   order: 6
-  #   type: 'boolean'
-  #   default: false
-  #   description: "Indent pasted text"
   split:
-    order: 7
+    order: 5
     type: 'string'
     default: 'right'
     enum: ["none", "left", "right" ]
     description: "Where phrase buffer opend"
   searchAllPanes:
-    order: 8
+    order: 6
     type: 'boolean'
     default: false
     description: "Open existing phrase buffer if exists"

@@ -17,24 +17,27 @@ This package helps you to save and refer those phrases quickly within Atom edito
 - Refer phrases you collected quickly.
 - Scope aware: when saved to phrase file, scope at cursor position is respected.
 
+# Command
+
+* `phrase:open`: open or save selected text to phrase file based on cursor scope.
+
 # How to use
 
 ## Save phrase
 
 1. Select buffer
-2. Invoke `phrase:save` command.
+2. Invoke `phrase:open` command.
 3. Your selected code is pasted at top of phrase file(nomral TextEditor).
 4. You collect bunch of phrases this way.
 
 ## Refer phrase
 
-1. Invoke `phrase:find` command.
-2. Type phrase subject in select buffer and `confirm`.
-3. Phrase file open with the cursor positioned to phrase you chose.
+1. Invoke `phrase:open` command without selection.
 
 ## Share phrase
+[NOTE] Features and commands described in this `Share phrase` section is **NOT** yet implemented.
+But concepts are like bellow.
 
-[TODO] This feature is currently **NOT** Implemented yet. But concepts is like bellow.
 This package provide, mechanism to share your phrases to others.
 This need phrase registries on web.
 Phrase ragistries might be
@@ -54,15 +57,13 @@ Configure phrase repository
 No keymap by default.
 
 e.g.
-
-* Normal user
-
 ```coffeescript
-'atom-text-editor:not([mini])':
-  'ctrl-alt-p': 'phrase:save-or-find'
+'atom-workspace:not([mini])':
+  'ctrl-alt-p': 'phrase:open'
 ```
 
 # TODO
+- [ ] `phrase:find` command let you select phrase title from select-list.
 - [ ] Auto insert result to `Output:` placeholder.
 - [ ] Select phrase and run with one commmand like `phrase:update-output`.
 - [ ] Put cursor to title with `tab`?

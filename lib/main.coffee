@@ -14,7 +14,7 @@ module.exports =
   activate: (state) ->
     @disposables = new CompositeDisposable
     @disposables.add atom.commands.add 'atom-workspace',
-      'phrase:save': => @save()
+      'phrase:open': => @open()
 
   deactivate: ->
     @disposables.dispose()
@@ -23,19 +23,18 @@ module.exports =
     atom.grammars.getGrammars().map (grammar) ->
       grammar.scopeName
 
-  detectCursorScope: ->
-    supportedScopeNames = @getSupportedScopeNames()
-
-    cursor = @getEditor().getLastCursor()
-    scopesArray = cursor.getScopeDescriptor().getScopesArray()
-    scope = _.detect scopesArray.reverse(), (scope) ->
-      scope in supportedScopeNames
-    scope
-
   getCursorScope: ->
-    editor = @getEditor()
-    cursor = @getEditor().getLastCursor()
-    cursor.getScopeDescriptor()
+    @getEditor().getLastCursor().getScopeDescriptor()
+
+  getScopeName: (scope)->
+    supportedScopeNames = @getSupportedScopeNames()
+    scopeName = _.detect scope.getScopesArray().reverse(), (scope) ->
+      scope in supportedScopeNames
+    scopeName
+
+  getCommentString: (languageMode, scope) ->
+    # returned object is {commentStartString, commentEndString}
+    languageMode.commentStartAndEndStringsForScope(scope)
 
   overrideGrammarForPath: (filePath, scopeName) ->
     return if @grammarOverriddenPaths[filePath] is scopeName
@@ -48,7 +47,6 @@ module.exports =
 
   determineFilePath: (scopeName, URI) ->
     rootDir  = fs.normalize settings.get('root')
-    basename = settings.get 'basename'
 
     # Strategy
     # Determine appropriate filename extension in following order.
@@ -58,18 +56,15 @@ module.exports =
     ext  = scope2extname[scopeName]
     ext ?= (path.extname URI).substr(0)
     ext ?= scopeName
-    path.join rootDir, "#{basename}.#{ext}"
+    path.join rootDir, "phrase.#{ext}"
 
-  save: ->
-    editor    = @getEditor()
-    URI       = editor.getURI()
-    selection = editor.getLastSelection()
-    scopeName = @detectCursorScope()
-    languageMode = editor.languageMode
-    scope = @getCursorScope()
-
-    # {commentStartString, commentEndString}
-    commentString = languageMode.commentStartAndEndStringsForScope(scope)
+  open: ->
+    editor        = @getEditor()
+    URI           = editor.getURI()
+    selection     = editor.getLastSelection()
+    scope         = @getCursorScope()
+    scopeName     = @getScopeName(scope)
+    commentString = @getCommentString(editor.languageMode, scope)
 
     filePath  = @determineFilePath scopeName, URI
     @overrideGrammarForPath filePath, scopeName
