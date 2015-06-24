@@ -35,6 +35,9 @@ This package helps you to save and refer those phrases quickly within Atom edito
 1. Invoke `phrase:open` command without selection.
 
 ## Share phrase
+
+[my phrase collection](https://github.com/t9md/phrase)
+
 [NOTE] Features and commands described in this `Share phrase` section is **NOT** yet implemented.
 But concepts are like bellow.
 
