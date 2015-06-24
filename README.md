@@ -5,8 +5,6 @@ Alpha
 
 Frequently used phrase registry.
 
-![gif](https://raw.githubusercontent.com/t9md/t9md/12fba4ff60861ae1acd973407c93a62edf61c956/img/atom-try.gif)
-
 # Why?
 Phrase is workable code fragments or example code which you want to refer later.
 While you are try&error some code and reach some conclusion.
