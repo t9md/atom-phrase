@@ -1,7 +1,7 @@
 {
   "name": "phrase",
   "main": "./lib/main",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "frequently used phrase registry",
   "keywords": [
     "#codeshare"
