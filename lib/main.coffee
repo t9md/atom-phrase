@@ -1,5 +1,5 @@
 {CompositeDisposable} = require 'atom'
-_        = require 'underscore-plus'
+# _        = require 'underscore-plus'
 path     = require 'path'
 fs       = require 'fs-plus'
 settings = require './settings'
@@ -24,17 +24,19 @@ module.exports =
       grammar.scopeName
 
   getCursorScope: ->
-    @getEditor().getLastCursor().getScopeDescriptor()
+    editor = @getEditor()
+    [rowStart, rowEnd] = editor.getLastSelection().getBufferRowRange()
+    editor.scopeDescriptorForBufferPosition([rowStart, 0])
 
   getScopeName: (scope)->
-    supportedScopeNames = @getSupportedScopeNames()
-    scopeName = _.detect scope.getScopesArray().reverse(), (scope) ->
-      scope in supportedScopeNames
-    scopeName
+    scopeNames = scope.getScopesArray().slice().reverse()
+    for scopeName in scopeNames when scopeName in @getSupportedScopeNames()
+      return scopeName
+    null
 
   getCommentString: (languageMode, scope) ->
     # returned object is {commentStartString, commentEndString}
-    languageMode.commentStartAndEndStringsForScope(scope)
+    @getEditor().languageMode.commentStartAndEndStringsForScope(scope)
 
   overrideGrammarForPath: (filePath, scopeName) ->
     return if @grammarOverriddenPaths[filePath] is scopeName
