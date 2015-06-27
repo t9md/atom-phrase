@@ -1,4 +1,6 @@
-## [Pre] 0.1.2 - Improve
+## 0.1.2 - Improve
+* Use `activationCommands`
+* Fix keyword
 
 ## 0.1.1 - Improve
 * More precise cursor scope detection.

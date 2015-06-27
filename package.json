@@ -3,9 +3,11 @@
   "main": "./lib/main",
   "version": "0.1.1",
   "description": "frequently used phrase registry",
-  "keywords": [
-    "#codeshare"
-  ],
+  "activationCommands": {
+    "atom-workspace": [
+      "phrase:open"
+    ]
+  },
   "repository": "https://github.com/t9md/atom-phrase",
   "license": "MIT",
   "engines": {
