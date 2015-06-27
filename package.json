@@ -1,7 +1,7 @@
 {
   "name": "phrase",
   "main": "./lib/main",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "frequently used phrase registry",
   "activationCommands": {
     "atom-workspace": [
